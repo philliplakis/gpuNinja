@@ -25,6 +25,7 @@ if (!gotTheLock) {
       mainWindow.show();
     }
   });
+
   app.on("ready", function () {
     log.info(`I N I T I A T I N G`);
     log.info(`Running V ${app.getVersion()}`);
@@ -59,6 +60,7 @@ if (!gotTheLock) {
       mainWindow.show();
       mainWindow.focus();
     });
+
     mainWindow.on("close", function (event) {
       if (!app.isQuiting) {
         event.preventDefault();

@@ -2,6 +2,8 @@
   "name": "gpu-x",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
+  "main": "src/electron-starter.js",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -12,9 +14,15 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "predev": "react-scripts start",
+    "dev": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "electron-pack": "electron-builder",
+    "publish": "set \"GH_TOKEN=\" && electron-builder -p always"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +38,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron": "^9.0.5",
+    "electron-builder": "^22.7.0"
   }
 }

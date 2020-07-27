@@ -4,13 +4,14 @@ import { Line, Circle } from "rc-progress";
 const style = {};
 style.backgroundColor = "#202020";
 style.borderRadius = 10;
-style.maxWidth = 300;
-style.minHeight = 100;
+style.width = 300;
+style.minHeight = 80;
 style.margin = 5;
 
 const heading = {};
 heading.textAlign = "left";
-heading.padding = 15;
+heading.paddingLeft = 15;
+heading.paddingTop = 10;
 heading.fontWeight = 900;
 heading.fontSize = 16;
 heading.fontFamily = `'Mulish', sans-serif`;
@@ -28,7 +29,7 @@ const containerLeftStyle = {
 };
 
 const barTitle = {};
-barTitle.marginBottom = -10;
+barTitle.marginBottom = -15;
 barTitle.textAlign = "left";
 barTitle.fontWeight = 400;
 barTitle.fontSize = 12;
@@ -63,7 +64,7 @@ circleValue.color = "#fff";
 export default function Card(props) {
   return (
     <div style={style}>
-      <h1 style={heading}>This.Name</h1>
+      <h1 style={heading}>This.GPU</h1>
       <div style={containerRightStyle}>
         <h3 style={barTitle}>Temperature</h3>
         <Line
@@ -71,7 +72,7 @@ export default function Card(props) {
           strokeWidth="4"
           trailWidth="4"
           trailColor={"#393939"}
-          strokeColor={"#ffffff"}
+          strokeColor={"#4d84e3"}
         />
         <h2 style={barValue}>30 C</h2>
         <h3 style={barTitle}>Memory</h3>
@@ -80,7 +81,7 @@ export default function Card(props) {
           strokeWidth="4"
           trailWidth="4"
           trailColor={"#393939"}
-          strokeColor={"#ffffff"}
+          strokeColor={"#4d84e3"}
         />
         <h2 style={barValue}>30 %</h2>
       </div>
@@ -88,10 +89,10 @@ export default function Card(props) {
         <h3 style={circleTitle}>Load</h3>
         <Circle
           percent={50}
-          strokeWidth="4"
-          trailWidth="4"
+          strokeWidth="7"
+          trailWidth="7"
           trailColor={"#393939"}
-          strokeColor={"#ffffff"}
+          strokeColor={"#4d84e3"}
         />
         <h2 style={circleValue}>30 %</h2>
       </div>

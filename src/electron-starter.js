@@ -43,7 +43,7 @@ if (!gotTheLock) {
         nodeIntegration: true,
         disableBlinkFeatures: "Auxclick",
         experimentalFeatures: true,
-        backgroundColor: "#ffffff",
+        backgroundColor: "#000",
       },
     });
 
@@ -73,7 +73,7 @@ if (!gotTheLock) {
       mainWindow = null;
     });
 
-    app.setAsDefaultProtocolClient("gpu");
+    app.setAsDefaultProtocolClient("gpuNinja");
 
     app.on("window-all-closed", function () {
       app.quit();

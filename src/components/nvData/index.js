@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const ElectronSystem = require("../../classes");
+const ElectronSystem = require("../../classes").default;
 const info = new ElectronSystem();
 
 const Wrapper = styled.div`
@@ -78,11 +78,11 @@ function DisplayData({ gpu }) {
       <StyledLine title={" MEM Clock"} data={gpu.gpu.max_clocks.mem_clock} />
       <StyledLine
         title={"Max Link"}
-        data={gpu.gpu.pci.pci_gpu_link_info.max_link_width}
+        data={gpu.gpu.pci.pci_gpu_link_info.link_widths.max_link_width}
       />
       <StyledLine
         title={"Current Link"}
-        data={gpu.gpu.pci.pci_gpu_link_info.current_link_width}
+        data={gpu.gpu.pci.pci_gpu_link_info.link_widths.current_link_width}
       />
       <StyledLine title={"Perf State"} data={gpu.gpu.performance_state} />
       <StyledLine
@@ -102,13 +102,18 @@ function DisplayData({ gpu }) {
   );
 }
 
-export default function Dashboard(props) {
+export default function NVData() {
   const [gpu, setGPU] = useState(null);
 
   if (!gpu) {
-    info.smi().then((data) => {
-      setGPU(data);
-    });
+    const smi = localStorage.getItem("smi");
+    if (smi) {
+      setGPU(JSON.parse(smi));
+    } else {
+      info.smi().then((data) => {
+        setGPU(data);
+      });
+    }
   }
 
   return <Wrapper>{!gpu ? null : <DisplayData gpu={gpu} />}</Wrapper>;

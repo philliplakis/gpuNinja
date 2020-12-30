@@ -33,19 +33,39 @@ const Link = styled.a`
 export default function Sidebar(props) {
   return (
     <Sidenav>
-      <Link selected href="#">
+      <Link
+        id="Dashboard"
+        selected={props.selected === "Dashboard" ? true : null}
+        onClick={() => props.onClick("Dashboard")}
+      >
         <RiCpuLine />
       </Link>
-      <Link href="#">
+      <Link
+        id="NVData"
+        selected={props.selected === "NVData" ? true : null}
+        onClick={() => props.onClick("NVData")}
+      >
         <SiNvidia />
       </Link>
-      <Link href="#">
+      <Link
+        id="SystemInfo"
+        selected={props.selected === "SystemInfo" ? true : null}
+        onClick={() => props.onClick("SystemInfo")}
+      >
         <TiInfoLarge />
       </Link>
-      <Link href="#">
+      <Link
+        id="Settings"
+        selected={props.selected === "Settings" ? true : null}
+        onClick={() => props.onClick("Settings")}
+      >
         <RiSettings4Line />
       </Link>
-      <Link href="#">
+      <Link
+        id="Power"
+        selected={props.selected === "Power" ? true : null}
+        onClick={() => props.onClick("Power")}
+      >
         <TiPower />
       </Link>
     </Sidenav>

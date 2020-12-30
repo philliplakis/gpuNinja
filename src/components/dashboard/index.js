@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Card from "../card";
 
-const ElectronSystem = require("../../classes");
+const ElectronSystem = require("../../classes").default;
 const info = new ElectronSystem();
 
 const Wrapper = styled.div`
@@ -19,16 +19,19 @@ export default function Dashboard(props) {
   const [gpu, setGPU] = useState(null);
 
   if (!gpu) {
+    const smi = localStorage.getItem("smi");
+    setGPU(JSON.parse(smi));
     info.smi().then((data) => {
       setGPU(data);
+      localStorage.setItem("smi", JSON.stringify(data));
     });
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
       info.smi().then((data) => {
-        console.log(data);
         setGPU(data);
+        localStorage.setItem("smi", JSON.stringify(data));
       });
     }, 5000);
 

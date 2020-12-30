@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import SideBar from "./components/sidebar";
@@ -22,11 +22,20 @@ const Wrapper = styled.div`
 `;
 
 function App() {
+  const [page, setPage] = useState("Dashboard");
+
+  const HandleClick = (id) => {
+    setPage(id);
+  };
+
   return (
     <Wrapper>
-      <SideBar />
-      <Dashboard />
-      {/* <NVData /> */}
+      <SideBar onClick={HandleClick} selected={page} />
+      {page === "Dashboard" ? (
+        <Dashboard />
+      ) : page === "NVData" ? (
+        <NVData />
+      ) : null}
     </Wrapper>
   );
 }

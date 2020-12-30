@@ -5,7 +5,7 @@ const os = electron.remote.require("os");
 const fs = electron.remote.require("fs");
 const si = electron.remote.require("systeminformation");
 
-module.exports = class ElectronSystem {
+export default class ElectronSystem {
   constructor() {
     this.nvidiaSmiPath = null;
   }
@@ -87,4 +87,4 @@ module.exports = class ElectronSystem {
       return this._error(error);
     }
   }
-};
+}

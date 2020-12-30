@@ -29,7 +29,7 @@ if (!gotTheLock) {
       transparent: true,
       frame: false,
       width: 500,
-      height: 400,
+      height: 700,
       center: true,
       hasShadow: true,
       resizable: false,

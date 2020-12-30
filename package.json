@@ -5,15 +5,17 @@
   "homepage": ".",
   "main": "src/electron-starter.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
     "os": "^0.1.1",
     "rc-progress": "^3.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "systeminformation": "^4.26.9",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
+    "react-scripts": "4.0.1",
+    "styled-components": "^5.2.1",
+    "systeminformation": "^4.33.4",
     "xml2js": "^0.4.23"
   },
   "scripts": {
@@ -44,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "electron": "^9.0.5",
+    "electron": "^11.1.1",
     "electron-builder": "^22.7.0"
   }
 }

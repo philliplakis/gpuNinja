@@ -1,100 +1,93 @@
 import React, { useState, useEffect } from "react";
-import { Line, Circle } from "rc-progress";
+import styled from "styled-components";
 
-const style = {};
-style.backgroundColor = "#202020";
-style.borderRadius = 10;
-style.maxWidth = 300;
-style.minHeight = 100;
-style.margin = 5;
+import CircleChart from "../circleChart";
+import LineChart from "../lineChart";
+import ClockChart from "../clockChart";
 
-const heading = {};
-heading.textAlign = "left";
-heading.padding = 15;
-heading.fontWeight = 900;
-heading.fontSize = 16;
-heading.fontFamily = `'Mulish', sans-serif`;
+const Wrapper = styled.div`
+  background-color: #202020;
+  border-radius: 10px;
+  width: 300px;
+  min-height: 100%;
+  margin: 15px;
+  padding: 10px;
+  font-family: "Mulish", sans-serif;
+`;
 
-const containerRightStyle = {
-  float: "right",
-  paddingRight: 10,
-  width: "45%",
-};
+const GPU = styled.div`
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+  text-align: left;
+`;
 
-const containerLeftStyle = {
-  float: "left",
-  paddingLeft: 10,
-  width: "40%",
-};
+const Heading = styled.div`
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-align: left;
+`;
 
-const barTitle = {};
-barTitle.marginBottom = -10;
-barTitle.textAlign = "left";
-barTitle.fontWeight = 400;
-barTitle.fontSize = 12;
-barTitle.fontFamily = `'Mulish', sans-serif`;
-barTitle.color = "#ACACAC";
-
-const barValue = {};
-barValue.marginTop = -3;
-barValue.textAlign = "right";
-barValue.fontWeight = 700;
-barValue.fontSize = 14;
-barValue.fontFamily = `'Mulish', sans-serif`;
-barValue.color = "#fff";
-
-const circleTitle = {};
-circleTitle.paddingTop = 20;
-circleTitle.marginBottom = -50;
-circleTitle.textAlign = "center";
-circleTitle.fontWeight = 400;
-circleTitle.fontSize = 12;
-circleTitle.fontFamily = `'Mulish', sans-serif`;
-circleTitle.color = "#ACACAC";
-
-const circleValue = {};
-circleValue.marginTop = -60;
-circleValue.textAlign = "center";
-circleValue.fontWeight = 700;
-circleValue.fontSize = 14;
-circleValue.fontFamily = `'Mulish', sans-serif`;
-circleValue.color = "#fff";
+function parseSmi(params) {
+  const string = params.split(" ");
+  return parseInt(string);
+}
 
 export default function Card(props) {
+  const [data, setData] = useState(props.gpu.gpu);
+
+  useEffect(() => {
+    setData(props.gpu.gpu);
+  }, [props]);
+
   return (
-    <div style={style}>
-      <h1 style={heading}>This.Name</h1>
-      <div style={containerRightStyle}>
-        <h3 style={barTitle}>Temperature</h3>
-        <Line
-          percent={50}
-          strokeWidth="4"
-          trailWidth="4"
-          trailColor={"#393939"}
-          strokeColor={"#ffffff"}
+    <>
+      <GPU>{data.product_name}</GPU>
+      <Wrapper>
+        <ClockChart
+          current={parseSmi(data.clocks.graphics_clock)}
+          max={parseSmi(data.max_clocks.graphics_clock)}
+          title="GPU"
+          symbol="MHz"
         />
-        <h2 style={barValue}>30 C</h2>
-        <h3 style={barTitle}>Memory</h3>
-        <Line
-          percent={50}
-          strokeWidth="4"
-          trailWidth="4"
-          trailColor={"#393939"}
-          strokeColor={"#ffffff"}
+        <ClockChart
+          current={parseSmi(data.clocks.mem_clock)}
+          max={parseSmi(data.max_clocks.mem_clock)}
+          title="MEM"
+          symbol="MHz"
         />
-        <h2 style={barValue}>30 %</h2>
-      </div>
-      <div style={containerLeftStyle}>
-        <h3 style={circleTitle}>Load</h3>
-        <Circle
-          percent={50}
-          strokeWidth="4"
-          trailWidth="4"
-          trailColor={"#393939"}
-          strokeColor={"#ffffff"}
+        <ClockChart
+          current={parseSmi(data.temperature.gpu_temp)}
+          max={parseSmi(data.temperature.gpu_temp_max_gpu_threshold)}
+          title="Temp"
+          symbol="C"
         />
-        <h2 style={circleValue}>30 %</h2>
-      </div>
-    </div>
+      </Wrapper>
+      <Wrapper>
+        <Heading>Utilization</Heading>
+        <CircleChart value={parseSmi(data.utilization.gpu_util)} title="GPU" />
+        <LineChart
+          value={parseSmi(data.utilization.memory_util)}
+          title="Memory"
+          symbol="%"
+        />
+        <LineChart
+          value={parseSmi(data.utilization.encoder_util)}
+          title="Encoder"
+          symbol="%"
+        />
+        <LineChart
+          value={parseSmi(data.utilization.decoder_util)}
+          title="Decoder"
+          symbol="%"
+        />
+        <LineChart
+          value={parseSmi(data.fan_speed)}
+          title="Fan Speed"
+          symbol="%"
+        />
+      </Wrapper>
+    </>
   );
 }

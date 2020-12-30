@@ -1,31 +1,41 @@
-import React from "react";
-import System from "../card/system";
-import Battery from "../card/battery";
-import GPU from "../card/gpu";
-import Hdd from "../card/hdd";
-import CPU from "../card/cpu";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-const flex = {};
-flex.paddingTop = 40;
-flex.width = 920;
-flex.height = 550;
-flex.display = "flex";
-flex.flexDirection = "column";
-flex.flexWrap = "wrap";
-flex.justifyContent = "center";
+import Card from "../card";
+
+const ElectronSystem = require("../../classes");
+const info = new ElectronSystem();
+
+const Wrapper = styled.div`
+  width: 450px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-right: 50px;
+`;
 
 export default function Dashboard(props) {
-  return (
-    <div style={flex}>
-      <System />
-      <CPU />
-      <Battery />
-      <Hdd />
-      <Hdd />
-      <CPU />
-      <GPU />
-      <GPU />
-      <Hdd />
-    </div>
-  );
+  const [gpu, setGPU] = useState(null);
+
+  if (!gpu) {
+    info.smi().then((data) => {
+      setGPU(data);
+    });
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      info.smi().then((data) => {
+        console.log(data);
+        setGPU(data);
+      });
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return <Wrapper>{!gpu ? null : <Card gpu={gpu} />}</Wrapper>;
 }

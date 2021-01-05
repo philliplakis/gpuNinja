@@ -1,5 +1,6 @@
 {
-  "name": "gpuNinja",
+  "name": "gpuninja",
+  "productname": "GPU Ninja",
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
@@ -28,8 +29,9 @@
     "predev": "react-scripts start",
     "dev": "electron .",
     "postinstall": "electron-builder install-app-deps",
+    "publish": "set \"GH_TOKEN=\" && electron-builder -p always",
     "electron-pack": "electron-builder",
-    "publish": "set \"GH_TOKEN=\" && electron-builder -p always"
+    "electron-pack:appimage": "DOCKER_BUILDKIT=1 docker build -o dist -t gpuninja ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,10 +54,11 @@
   },
   "author": {
     "name": "GPU Ninja",
+    "email": "support@gpuninjanothere.com",
     "url": "https://github.com/philliplakis/gpuNinja"
   },
   "description": "GPU Ninja | GPU monitoring",
-  "extends": null,
+  "license": "MIT",
   "build": {
     "productName": "GPU Ninja",
     "appId": "com.gpuninja",
@@ -65,7 +68,7 @@
       "build/**/*",
       "node_modules/**/"
     ],
-    "copyright": "© 2021",
+    "copyright": "MIT © 2021",
     "win": {
       "target": [
         {
@@ -75,12 +78,17 @@
           ]
         }
       ],
-      "icon": "/public/gpuninja_logo.png",
+      "icon": "/public/icon.png",
       "publisherName": "Phillip Lakis"
     },
     "nsis": {
       "oneClick": true,
       "perMachine": false
-    }
+    },
+    "linux": {
+      "target": "appImage",
+      "icon": "./public/icon.png"
+    },
+    "appImage": {}
   }
 }

@@ -1,6 +1,6 @@
-# GPU Ninja
+# ![image](https://raw.githubusercontent.com/philliplakis/gpuNinja/master/public/gpuninja_logo.png) GPU Ninja
 
-##### [Download Released App](https://github.com/philliplakis/gpuNinja/releases)
+#### [Download Released App](https://github.com/philliplakis/gpuNinja/releases)
 
 # -
 
@@ -31,7 +31,9 @@ return this._resolve(result.nvidia_smi_log);
 
 ## How To Use
 
-To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](https://www.npmjs.com/)) installed on your computer. From your command line:
+To clone and run this repository you'll need [Git](https://git-scm.com), [Yarn](https://yarnpkg.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](https://www.npmjs.com/)) installed on your computer. From your command line:
+
+> Swap Yarn commands for npm if you do not have Yarn installed
 
 ```bash
 # Clone this repository
@@ -42,7 +44,7 @@ cd gpuNinja
 yarn
 # First you need to start React:
 yarn start
-& (after your React-App displays in your browser)
+# & (after your React-App displays in your browser)
 yarn electron
 ```
 

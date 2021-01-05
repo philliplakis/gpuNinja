@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+    "electron-is-dev": "^1.2.0",
     "os": "^0.1.1",
     "rc-progress": "^3.0.0",
     "react": "^17.0.1",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
+    "build": "set \"REACT_APP_SC_DISABLE_SPEEDY=true\" && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
@@ -48,5 +49,38 @@
   "devDependencies": {
     "electron": "^11.1.1",
     "electron-builder": "^22.7.0"
+  },
+  "author": {
+    "name": "GPU Ninja",
+    "url": "https://github.com/philliplakis/gpuNinja"
+  },
+  "description": "GPU Ninja | GPU monitoring",
+  "extends": null,
+  "build": {
+    "productName": "GPU Ninja",
+    "appId": "com.gpuninja",
+    "asar": true,
+    "files": [
+      "dist//*",
+      "build/**/*",
+      "node_modules/**/"
+    ],
+    "copyright": "© 2021",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "/public/gpuninja_logo.png",
+      "publisherName": "Phillip Lakis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false
+    }
   }
 }

@@ -7,7 +7,6 @@ import NVData from "./components/nvData";
 
 const Wrapper = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
-
   text-align: center;
   background-color: #000000;
   min-height: 100vh;
@@ -17,8 +16,6 @@ const Wrapper = styled.div`
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  border-radius: 5px;
-  /* -webkit-app-region: drag; */
 `;
 
 function App() {

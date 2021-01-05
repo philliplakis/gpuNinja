@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { RiCpuLine, RiSettings4Line } from "react-icons/ri";
 import { SiNvidia } from "react-icons/si";
 import { TiPower, TiInfoLarge } from "react-icons/ti";
+const { remote } = window.require("electron");
 
 const Sidenav = styled.div`
-  height: 380px;
+  height: 360px;
   width: 80px;
   position: fixed;
   z-index: 1;
@@ -13,9 +14,10 @@ const Sidenav = styled.div`
   left: 0;
   background-color: #111;
   overflow-x: hidden;
-  padding-top: 20px;
+  padding-top: 40px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  -webkit-app-region: drag;
 `;
 
 const Link = styled.a`
@@ -24,6 +26,7 @@ const Link = styled.a`
   font-size: 30px;
   display: block;
   color: ${(props) => (props.selected ? "#e94057" : "#818181")};
+  -webkit-app-region: no-drag;
   &:hover {
     color: #e94057;
     cursor: pointer;
@@ -31,6 +34,11 @@ const Link = styled.a`
 `;
 
 export default function Sidebar(props) {
+  const close = () => {
+    const window = remote.BrowserWindow.getFocusedWindow();
+    window.close();
+  };
+
   return (
     <Sidenav>
       <Link
@@ -61,11 +69,7 @@ export default function Sidebar(props) {
       >
         <RiSettings4Line />
       </Link>
-      <Link
-        id="Power"
-        selected={props.selected === "Power" ? true : null}
-        onClick={() => props.onClick("Power")}
-      >
+      <Link id="Power" onClick={close}>
         <TiPower />
       </Link>
     </Sidenav>

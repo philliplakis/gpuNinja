@@ -1,12 +1,10 @@
-const { app, BrowserWindow, Menu, Tray, ipcMain, dialog } = require("electron");
-
+const { app, BrowserWindow, Menu, Tray } = require("electron");
+const isDev = require("electron-is-dev");
+const path = require("path");
 const gotTheLock = app.requestSingleInstanceLock();
-// const appFolder = path.dirname(process.execPath);
-// const updateExe = path.resolve(appFolder, "..", "Update.exe");
-// const exeName = path.basename(process.execPath);
 
 let mainWindow;
-let isDev = true;
+let tray = null;
 let log = console;
 
 if (!gotTheLock) {
@@ -69,15 +67,33 @@ if (!gotTheLock) {
     });
 
     app.setAsDefaultProtocolClient("gpuNinja");
-
-    app.on("window-all-closed", function () {
-      app.quit();
-    });
-
-    app.on("activate", function () {
-      if (mainWindow === null) {
-        createWindow();
-      }
-    });
   });
 }
+
+app.whenReady().then(() => {
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Show App",
+      click: function () {
+        mainWindow.show();
+      },
+    },
+    { type: "separator" },
+    {
+      label: "Quit",
+      click: function () {
+        app.isQuiting = true;
+        app.quit();
+      },
+    },
+  ]);
+
+  const iconpath = path.join(__dirname, "../build/gpuninja_logo.png");
+  console.log(iconpath);
+  tray = new Tray(iconpath);
+  tray.setToolTip("GPU Ninja | GPU monitoring");
+  tray.setContextMenu(contextMenu);
+  tray.on("double-click", () => {
+    mainWindow.show();
+  });
+});

@@ -1,4 +1,5 @@
-# ![image](https://raw.githubusercontent.com/philliplakis/gpuNinja/master/public/gpuninja_logo.png) GPU Ninja
+<img src="https://raw.githubusercontent.com/philliplakis/gpuNinja/master/public/gpuninja_logo.png" width="100">
+# GPU Ninja
 
 #### [Download Released App](https://github.com/philliplakis/gpuNinja/releases)
 
